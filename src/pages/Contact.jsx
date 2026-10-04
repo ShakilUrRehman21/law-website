@@ -62,7 +62,6 @@ const Contact = () => {
                                         <div className="meta-icon"><Phone size={18} /></div>
                                         <div>
                                             <h4>Direct Phone</h4>
-                                            <a href="tel:+919818225972">+91 9818225972</a>
                                             <a href="tel:+919250845823">+91 9250845823</a>
                                         </div>
                                     </div>
@@ -71,7 +70,6 @@ const Contact = () => {
                                         <div className="meta-icon"><Mail size={18} /></div>
                                         <div>
                                             <h4>Official Email</h4>
-                                            <a href="mailto:sarfarazhussain466@gmail.com">sarfarazhussain466@gmail.com</a>
                                             <a href="mailto:aa.affanhus@gmail.com">aa.affanhus@gmail.com</a>
                                         </div>
                                     </div>

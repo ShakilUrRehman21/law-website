@@ -3,7 +3,7 @@ import './WhatsAppButton.css';
 
 const WhatsAppButton = () => {
     // WhatsApp number with country code (without + or 00)
-    const phoneNumber = "919818225972";
+    const phoneNumber = "919250845823";
 
     // We can also add a default message if desired:
     // const message = encodeURIComponent("Hello, I would like to schedule a consultation with Advocate Sarfaraz Hussain.");

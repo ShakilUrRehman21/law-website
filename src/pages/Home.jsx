@@ -40,7 +40,7 @@ const teamMembers = [
         img: "/sarfaraz_hussain.png", 
         featured: true,
         category: "senior",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "mf-khan",
@@ -52,7 +52,7 @@ const teamMembers = [
         img: "/mf_khan.png",
         featured: false,
         category: "senior",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "ali",
@@ -64,7 +64,7 @@ const teamMembers = [
         img: "/ali.png",
         featured: false,
         category: "junior",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "sabahat",
@@ -76,7 +76,7 @@ const teamMembers = [
         img: "/sabahat.png",
         featured: false,
         category: "associate",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "anita",
@@ -88,7 +88,7 @@ const teamMembers = [
         img: "/anita.png",
         featured: false,
         category: "junior",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "affan",
@@ -100,7 +100,7 @@ const teamMembers = [
         img: "/affan.png",
         featured: false,
         category: "junior",
-        phone: "+91 9818225972"
+        
     },
     { 
         id: "zaki",
@@ -112,7 +112,7 @@ const teamMembers = [
         img: "/zaki.png",
         featured: false,
         category: "associate",
-        phone: "+91 9818225972"
+        
     }
 ];
 
@@ -271,10 +271,6 @@ const Home = () => {
                                     <span>Book a Consultation</span>
                                     <ArrowUpRight size={16} />
                                 </Link>
-                                <a href="tel:+919818225972" className="btn-lawcrest btn-lawcrest-outline-light">
-                                    <Phone size={15} />
-                                    <span>+91 9818225972</span>
-                                </a>
                             </div>
 
                             <div className="hero-trust-summary">
@@ -595,7 +591,7 @@ const Home = () => {
                             <img src={selectedAttorney.img} alt={selectedAttorney.name} />
                             <div className="spotlight-active-badge">
                                 <Sparkles size={14} />
-                                <span>Active Dossier</span>
+                                <span>Active</span>
                             </div>
                         </div>
 
@@ -614,19 +610,6 @@ const Home = () => {
                             </div>
 
                             <div className="spotlight-actions-row">
-                                <a href={`tel:${selectedAttorney.phone}`} className="btn-lawcrest btn-lawcrest-solid-dark">
-                                    <Phone size={15} />
-                                    <span>Call Chamber: {selectedAttorney.phone}</span>
-                                </a>
-                                <a 
-                                    href="https://wa.me/919818225972" 
-                                    target="_blank" 
-                                    rel="noopener noreferrer" 
-                                    className="btn-lawcrest btn-lawcrest-outline-dark"
-                                >
-                                    <MessageCircle size={15} />
-                                    <span>WhatsApp Inquiry</span>
-                                </a>
                                 <Link to="/contact" className="btn-lawcrest btn-lawcrest-outline-dark">
                                     <span>Book Consultation</span>
                                     <ArrowUpRight size={15} />
@@ -677,7 +660,7 @@ const Home = () => {
                                         <h4 className="card-member-name">{member.name}</h4>
                                         <span className="card-member-role">{member.role}</span>
                                         <div className="card-select-hint">
-                                            <span>{isSelected ? '✓ Viewing Dossier' : 'Click to inspect profile'}</span>
+                                            <span>{isSelected ? '✓ Viewing' : 'Click to inspect profile'}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -792,12 +775,7 @@ const Home = () => {
                                         <CheckCircle2 size={18} className="feat-icon" />
                                         <span>Transparent Assessment of Merits & Risks</span>
                                     </div>
-                                </div>
-
-                                <div className="chamber-quick-call">
-                                    <span>Direct Chamber Inquiries:</span>
-                                    <a href="tel:+919818225972">+91 9818225972</a>
-                                </div>
+                                </div>  
                             </div>
                         </div>
 
