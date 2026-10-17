@@ -1,0 +1,120 @@
+.lawcrest-notfound-page {
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    background: radial-gradient(circle at 50% 30%, #151515 0%, #090909 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.lawcrest-notfound-page::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.notfound-content-card {
+    max-width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(18, 18, 18, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg, 16px);
+    padding: 60px 40px;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.notfound-badge-wrap {
+    display: inline-block;
+    margin-bottom: 24px;
+}
+
+.notfound-numeral-glitch {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(80px, 14vw, 140px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #c5a059 20%, #7d632f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 16px;
+    user-select: none;
+    text-shadow: 0 10px 30px rgba(197, 160, 89, 0.2);
+}
+
+.notfound-headline {
+    font-family: var(--font-serif, 'Playfair Display', serif);
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+}
+
+.notfound-description {
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 520px;
+    margin: 0 auto 36px;
+}
+
+.notfound-actions-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+
+.notfound-direct-helpline {
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.notfound-direct-helpline p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.notfound-direct-helpline a {
+    color: #c5a059;
+    font-weight: 600;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.notfound-direct-helpline a:hover {
+    color: #dfbf7c;
+}
+
+@media (max-width: 640px) {
+    .notfound-content-card {
+        padding: 40px 20px;
+    }
+
+    .notfound-actions-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .notfound-actions-group .btn-lawcrest {
+        width: 100%;
+        justify-content: center;
+    }
+}

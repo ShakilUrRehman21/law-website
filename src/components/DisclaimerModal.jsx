@@ -8,18 +8,27 @@ const DisclaimerModal = () => {
         const hasAgreed = localStorage.getItem('barCouncilAgreed');
         if (!hasAgreed) {
             setIsOpen(true);
-            document.body.style.overflow = 'hidden'; // Disable scroll
+            document.body.style.overflow = 'hidden';
+            if (window.__lenis) {
+                window.__lenis.stop();
+            }
         }
     }, []);
 
     const handleAgree = () => {
         localStorage.setItem('barCouncilAgreed', 'true');
         setIsOpen(false);
-        document.body.style.overflow = 'unset'; // Re-enable scroll
+        document.body.style.overflow = 'unset';
+        if (window.__lenis) {
+            window.__lenis.start();
+            window.__lenis.resize();
+        }
+        if (window.AOS) {
+            window.AOS.refresh();
+        }
     };
 
     const handleDisagree = () => {
-        // Redirect away as per requirements
         window.location.href = 'https://google.com';
     };
 

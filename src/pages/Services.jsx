@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Scale, Users, FileText, Home as HomeIcon, BookOpen, AlertCircle, ArrowUpRight, Plus, Minus } from 'lucide-react';
+import { Shield, Scale, Users, FileText, Home as HomeIcon, BookOpen, AlertCircle, ArrowUpRight, Plus, Minus, CheckCircle2, Landmark } from 'lucide-react';
 import './Services.css';
 
 const servicesData = [
@@ -8,7 +8,7 @@ const servicesData = [
         id: 1,
         title: 'Criminal Litigation',
         icon: Shield,
-        description: 'Expertise in SLP in Supreme Court of India, Criminal Appeals, Criminal Writs (Murder, Robbery, Dacoity, Pocso, Rape Cases, etc.)',
+        description: 'Expertise in SLP in Supreme Court of India, Criminal Appeals, Criminal Writs (Murder, Robbery, Dacoity, POCSO, Rape Cases, etc.)',
         details: [
             'Special Leave Petitions (SLP) before Supreme Court of India',
             'Criminal Writs under Article 226/32 of the Constitution',
@@ -102,20 +102,25 @@ const Services = () => {
 
     return (
         <div className="lawcrest-services-page">
-            {/* Hero Section */}
+            {/* Hero Section with High Impact AOS Entrance */}
             <section className="services-hero section-dark">
                 <div className="container">
                     <div className="services-hero-content">
-                        <span className="pill-badge pill-badge-dark">Practice & Defense</span>
-                        <h1 className="editorial-title text-white">Our Core Legal Services</h1>
-                        <p className="services-hero-lead">
-                            Comprehensive legal strategies tailored to your unique challenges, disputes, and statutory protections.
+                        <span className="pill-badge pill-badge-dark" data-aos="fade-down">
+                            <Landmark size={14} className="badge-icon-gold" />
+                            Practice &amp; Statutory Defense
+                        </span>
+                        <h1 className="editorial-title text-white" data-aos="fade-up" data-aos-delay="100">
+                            Our Core Legal Services
+                        </h1>
+                        <p className="services-hero-lead" data-aos="fade-up" data-aos-delay="200">
+                            Comprehensive courtroom defense and strategic counsel tailored to your unique challenges, statutory proceedings, and constitutional protections.
                         </p>
                     </div>
                 </div>
             </section>
 
-            {/* Services Detailed List (Cream Background) */}
+            {/* Services Detailed List with Scroll Animations */}
             <section className="services-list-section section-cream">
                 <div className="container">
                     <div className="services-grid-wrapper">
@@ -123,7 +128,12 @@ const Services = () => {
                             const isOpen = openIndex === index;
                             const IconComp = service.icon;
                             return (
-                                <div key={service.id} className={`service-item-card ${isOpen ? 'active' : ''}`}>
+                                <div 
+                                    key={service.id} 
+                                    className={`service-item-card ${isOpen ? 'active' : ''}`}
+                                    data-aos="fade-up"
+                                    data-aos-delay={(index % 3) * 120 + 80}
+                                >
                                     <button
                                         className="service-card-header"
                                         onClick={() => toggleAccordion(index)}
@@ -151,7 +161,10 @@ const Services = () => {
                                                     <h3 className="breakdown-label">Key Legal Interventions:</h3>
                                                     <ul className="service-bullet-list">
                                                         {service.details.map((detail, dIdx) => (
-                                                            <li key={dIdx}>{detail}</li>
+                                                            <li key={dIdx}>
+                                                                <CheckCircle2 size={15} className="bullet-check-gold" />
+                                                                <span>{detail}</span>
+                                                            </li>
                                                         ))}
                                                     </ul>
                                                 </div>

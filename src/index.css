@@ -1,4 +1,5 @@
 /* Lawcrest Design System for Sarfaraz Law */
+@import 'lenis/dist/lenis.css';
 
 :root {
   /* Color Palette */
@@ -24,6 +25,7 @@
   --accent-gold: #c5a059;
   --accent-gold-light: #dfc28b;
   --accent-gold-dark: #9f7d3a;
+  --accent-crimson: #e45735;
 
   /* Metallic foil gradient for key headings */
   --gradient-metallic: linear-gradient(135deg, #ffffff 0%, #f0ddc3 25%, #cfa065 50%, #faefe1 75%, #ffffff 100%);
@@ -56,12 +58,14 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Lenis Butter-Smooth Scrolling */
+/* Lenis Butter-Smooth Scrolling Requirements */
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -87,8 +91,88 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-light-primary);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative;
   font-size: 16px;
+}
+
+#root, 
+.lawcrest-layout,
+.lawcrest-home,
+.lawcrest-about-page,
+.lawcrest-services-page,
+.lawcrest-practice-page,
+.lawcrest-gallery-page,
+.lawcrest-contact-page,
+.lawcrest-notfound-page {
+  overflow-x: clip !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Prevent horizontal overflow from AOS transforms on tablets and mobile screens */
+@media (max-width: 768px) {
+  [data-aos="fade-left"],
+  [data-aos="fade-right"] {
+    transform: translate3d(0, 30px, 0) !important;
+  }
+}
+
+/* Scroll Reveal Framework */
+.scroll-reveal-item {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition-property: transform, opacity, filter;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-duration: 800ms;
+}
+
+.scroll-reveal-item.reveal-fade-up {
+  transform: translateY(32px);
+}
+
+.scroll-reveal-item.reveal-fade {
+  transform: translateY(0);
+}
+
+.scroll-reveal-item.reveal-scale-up {
+  transform: scale(0.94) translateY(16px);
+}
+
+.scroll-reveal-item.reveal-slide-left {
+  transform: translateX(-36px);
+}
+
+.scroll-reveal-item.reveal-slide-right {
+  transform: translateX(36px);
+}
+
+/* Revealed State */
+.scroll-reveal-item.is-revealed,
+[data-reveal].is-revealed {
+  opacity: 1 !important;
+  transform: translate(0, 0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Stagger helper */
+.stagger-1 { transition-delay: 100ms !important; }
+.stagger-2 { transition-delay: 200ms !important; }
+.stagger-3 { transition-delay: 300ms !important; }
+.stagger-4 { transition-delay: 400ms !important; }
+.stagger-5 { transition-delay: 500ms !important; }
+.stagger-6 { transition-delay: 600ms !important; }
+
+/* Fallback for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal-item,
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* Typography Defaults */
@@ -190,7 +274,8 @@ button {
   background-color: #ffffff;
   color: #000000;
   border-color: #ffffff;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
 }
 
 .btn-lawcrest-solid-light {
@@ -201,7 +286,8 @@ button {
 
 .btn-lawcrest-solid-light:hover {
   background-color: #f0f0f0;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn-lawcrest-outline-dark {
@@ -214,7 +300,8 @@ button {
   background-color: #111111;
   color: #ffffff;
   border-color: #111111;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .btn-lawcrest-solid-dark {
@@ -225,7 +312,8 @@ button {
 
 .btn-lawcrest-solid-dark:hover {
   background-color: #2b2b2b;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn-lawcrest-gold {
@@ -236,7 +324,8 @@ button {
 
 .btn-lawcrest-gold:hover {
   filter: brightness(1.1);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(197, 160, 89, 0.35);
 }
 
 /* Subtle Animated Dividers */

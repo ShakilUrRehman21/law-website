@@ -67,11 +67,13 @@ const Header = () => {
                     </Link>
 
                     <button
+                        type="button"
                         className="lawcrest-mobile-toggle"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        aria-label="Toggle Navigation"
+                        onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                        aria-label={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
+                        aria-expanded={isMobileMenuOpen}
                     >
-                        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
                     </button>
                 </div>
             </div>
@@ -84,22 +86,38 @@ const Header = () => {
                             <li key={link.name}>
                                 <NavLink
                                     to={link.path}
+                                    onClick={() => setIsMobileMenuOpen(false)}
                                     className={({ isActive }) =>
                                         `lawcrest-mobile-link ${isActive ? 'active' : ''}`
                                     }
                                 >
-                                    {link.name}
+                                    <span>{link.name}</span>
+                                    <ArrowUpRight size={14} className="mobile-link-arrow" />
                                 </NavLink>
                             </li>
                         ))}
                     </ul>
                     <div className="lawcrest-mobile-cta">
-                        <Link to="/contact" className="lawcrest-header-btn mobile-cta-btn">
-                            Book a Consultation
+                        <Link 
+                            to="/contact" 
+                            className="btn-lawcrest btn-lawcrest-solid-light mobile-cta-btn"
+                            onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                            <span>Book a Consultation</span>
+                            <ArrowUpRight size={16} />
                         </Link>
                     </div>
                 </div>
             </div>
+
+            {/* Mobile Backdrop Overlay */}
+            {isMobileMenuOpen && (
+                <div 
+                    className="lawcrest-mobile-backdrop" 
+                    onClick={() => setIsMobileMenuOpen(false)} 
+                    aria-hidden="true" 
+                />
+            )}
         </header>
     );
 };

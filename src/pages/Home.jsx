@@ -18,105 +18,128 @@ import {
     Plus,
     Minus,
     CheckCircle2,
-    Star,
     Award,
     MapPin,
     MessageCircle,
     Calendar,
     ChevronRight,
-    Sparkles
+    Sparkles,
+    GraduationCap,
+    Landmark
 } from 'lucide-react';
+import AnimatedCounter from '../components/AnimatedCounter';
 import './Home.css';
 
-// Existing team members from original data with rich senior-level attributes
-const teamMembers = [
+// Senior & Associate Attorneys with verified credentials and imagery
+export const teamMembers = [
     { 
         id: "sarfaraz",
         name: "Sarfaraz Hussain", 
-        role: "Advocate • Delhi High Court", 
+        role: "Founder & Lead Counsel", 
+        qualification: "B.E. (Civil), LL.B, LL.M (Criminal Law)",
         court: "Supreme Court of India & Delhi High Court",
         experience: "25+ Years Dedicated Standing",
-        specialty: "Criminal Litigation, Special Leave Petitions (SLP), Writs & Bail Matters",
+        specialty: "Criminal Litigation, Special Leave Petitions (SLP), Writs, Bail & Civil Disputes",
+        cases: "Shivani Bhatnagar Murder Case (for S.P. Sharma), JNU Matters, Najeeb Ahmed Disappearance, Ayodhya Ram Janmabhoomi (Supreme Court)",
         img: "/sarfaraz_hussain.png", 
+        phone: "+919250845823",
         featured: true,
         category: "senior",
-        
+        bio: "Delhi-based Civil Engineer cum Senior Advocate with 25+ years of distinguished courtroom advocacy. Known for landmark defenses in the Supreme Court of India and Delhi High Court, heading a panel of experienced advocates across Delhi-NCR."
     },
     { 
         id: "mf-khan",
         name: "M. F. Khan", 
-        role: "Former Public Prosecutor • Supreme Court", 
+        role: "Senior Prosecution & Constitutional Counsel", 
+        qualification: "LL.B, LL.M • Ex-Public Prosecutor",
         court: "Supreme Court of India",
-        experience: "Senior Prosecution & Constitutional Counsel",
-        specialty: "High-Stakes Criminal Appeals, Murder & Special Acts Litigation",
+        experience: "30+ Years Apex Court Standing",
+        specialty: "High-Stakes Criminal Appeals, Murder Trials, Constitutional Petitions & Special Acts",
+        cases: "Former Public Prosecutor before the Supreme Court of India; landmark appeals and constitutional references.",
         img: "/mf_khan.png",
+        phone: "+919250845823",
         featured: false,
         category: "senior",
-        
+        bio: "Former Public Prosecutor at the Supreme Court of India with three decades of appellate trial mastery. Provides strategic counsel on high-stakes criminal appeals and statutory interpretations."
     },
     { 
-        id: "ali",
-        name: "Ali", 
-        role: "Junior Advocate", 
+        id: "affan",
+        name: "Affan Husain", 
+        role: "Advocate • Litigation Counsel", 
+        qualification: "B.A. LL.B (Hons.)",
         court: "Delhi High Court & District Courts",
-        experience: "Courtroom Litigation Associate",
-        specialty: "Bail Hearings, Trial Procedures & Evidentiary Analysis",
-        img: "/ali.png",
+        experience: "Litigation & Defense Counsel",
+        specialty: "Criminal Defense, Trial Court Advocacy, SLP Precedents & High Court Filings",
+        cases: "Assisting lead counsel in High Court criminal revisions, bail applications, and Supreme Court filings.",
+        img: "/images/team-06.jpg", // Affan Husain, Advocate
+        phone: "+919250845823",
         featured: false,
-        category: "junior",
-        
+        category: "advocate",
+        bio: "Dedicated courtroom advocate focusing on criminal trials, judicial precedents, evidentiary scrutiny, and registry compliance across Delhi High Court and Sessions courts."
     },
     { 
         id: "sabahat",
         name: "Sabahat Hussain", 
         role: "Associate Advocate", 
+        qualification: "LL.B, B.Com",
         court: "Delhi High Court & Sessions Courts",
         experience: "Civil & Commercial Associate",
         specialty: "Civil Suits, Injunctions, Property Disputes & Specific Performance",
+        cases: "Representation in commercial contract litigation, temporary injunctions, partition suits, and civil appeals.",
         img: "/sabahat.png",
+        phone: "+919250845823",
         featured: false,
         category: "associate",
-        
-    },
-    { 
-        id: "anita",
-        name: "Anita", 
-        role: "Junior Advocate", 
-        court: "District & Sessions Courts, Delhi",
-        experience: "Matrimonial & Claims Associate",
-        specialty: "Family & Matrimonial Law, Custody & MACT Tribunal Claims",
-        img: "/anita.png",
-        featured: false,
-        category: "junior",
-        
-    },
-    { 
-        id: "affan",
-        name: "Affan Husain", 
-        role: "Intern", 
-        court: "Chamber Research & Judicial Filings",
-        experience: "Legal Research Scholar",
-        specialty: "Case Precedents, Judicial Research & Registry Compliance",
-        img: "/affan.png",
-        featured: false,
-        category: "junior",
-        
+        bio: "Specializes in complex civil litigation, recovery suits under Order 37 CPC, commercial contracts, and real estate title adjudication before High Court and District benches."
     },
     { 
         id: "zaki",
         name: "Mohd. Zaki", 
         role: "Associate Advocate", 
+        qualification: "B.A. LL.B",
         court: "Delhi High Court & District Courts",
-        experience: "Dispute Resolution Associate",
-        specialty: "138 NI Act Cheque Dishonour, Consumer Forums & Waqf Matters",
+        experience: "Dispute Resolution & Tribunal Associate",
+        specialty: "138 NI Act Cheque Dishonour, Consumer Forums & Waqf Tribunal Matters",
+        cases: "Appeared in extensive Negotiable Instruments Act trials and Waqf property management disputes.",
         img: "/zaki.png",
+        phone: "+919250845823",
         featured: false,
         category: "associate",
-        
+        bio: "Experienced in summary commercial proceedings, 138 NI Act trials, Consumer Commission redressals, and statutory disputes before the Waqf Tribunal of Delhi."
+    },
+    { 
+        id: "ali",
+        name: "Ali", 
+        role: "Junior Advocate", 
+        qualification: "LL.B",
+        court: "Delhi High Court & District Courts",
+        experience: "Courtroom Litigation Associate",
+        specialty: "Bail Hearings, Trial Procedures & Evidentiary Analysis",
+        cases: "Active in daily District Court trial hearings, remand proceedings, and interim bail representations.",
+        img: "/ali.png",
+        phone: "+919250845823",
+        featured: false,
+        category: "junior",
+        bio: "Handles swift courtroom appearances, trial court filings, witness cross-examination preparation, and emergency bail motions across all Delhi court complexes."
+    },
+    { 
+        id: "anita",
+        name: "Anita", 
+        role: "Junior Advocate", 
+        qualification: "B.A. LL.B",
+        court: "District & Sessions Courts, Delhi",
+        experience: "Matrimonial & Claims Associate",
+        specialty: "Family & Matrimonial Law, Custody & MACT Tribunal Claims",
+        cases: "Assisted in mutual consent divorce agreements, Section 125 maintenance, and motor accident compensation.",
+        img: "/anita.png",
+        phone: "+919250845823",
+        featured: false,
+        category: "junior",
+        bio: "Focuses on empathetic yet firm resolution of family disputes, guardianship, domestic violence proceedings, and MACT compensation claims."
     }
 ];
 
-// Existing Practice Highlights & Breakdown
+// Practice Highlights & Breakdown
 const practiceAreasData = [
     {
         id: "criminal",
@@ -185,7 +208,7 @@ const practiceAreasData = [
     }
 ];
 
-// FAQ items based on existing practice and consultation process
+// FAQ items
 const faqItems = [
     {
         q: "What types of legal services does Sarfaraz Hussain Advocate Law Offices provide?",
@@ -197,7 +220,7 @@ const faqItems = [
     },
     {
         q: "How can I schedule a consultation with Advocate Sarfaraz Hussain?",
-        a: "You can schedule a consultation by clicking the 'Book a Consultation' button on this website, calling our chamber directly at +91 9818225972, or messaging us on WhatsApp. In-person chamber meetings are conducted at the Delhi High Court Chamber and Batla House office."
+        a: "You can schedule a consultation by clicking the 'Book a Consultation' button on this website, calling our chamber directly at +91 9250845823, or messaging us on WhatsApp. In-person chamber meetings are conducted at the Delhi High Court Chamber and Batla House office."
     },
     {
         q: "What documents should I bring to the initial consultation?",
@@ -210,13 +233,8 @@ const faqItems = [
 ];
 
 const Home = () => {
-    // FAQ state
     const [openFaq, setOpenFaq] = useState(0);
-
-    // Practice areas ONE-AT-A-TIME carousel state
     const [currentPractice, setCurrentPractice] = useState(0);
-
-    // Team Filter and Spotlight state
     const [teamFilter, setTeamFilter] = useState('all');
     const [selectedAttorney, setSelectedAttorney] = useState(teamMembers[0]);
 
@@ -224,7 +242,6 @@ const Home = () => {
         setOpenFaq(openFaq === index ? -1 : index);
     };
 
-    // Practice carousel Next & Prev handlers
     const handleNextPractice = () => {
         setCurrentPractice((prev) => (prev + 1) % practiceAreasData.length);
     };
@@ -233,10 +250,10 @@ const Home = () => {
         setCurrentPractice((prev) => (prev - 1 + practiceAreasData.length) % practiceAreasData.length);
     };
 
-    // Filtered team members
     const filteredTeam = teamMembers.filter((m) => {
         if (teamFilter === 'all') return true;
         if (teamFilter === 'senior') return m.category === 'senior';
+        if (teamFilter === 'advocate') return m.category === 'advocate';
         if (teamFilter === 'associate') return m.category === 'associate' || m.category === 'junior';
         return true;
     });
@@ -244,43 +261,48 @@ const Home = () => {
     return (
         <div className="lawcrest-home">
 
-            {/* 1. HERO SECTION (Clean Split Layout, Normal Rectangular Shape, ZERO Overlap) */}
+            {/* 1. HERO SECTION (Split Layout with High Impact Entrance Animations) */}
             <section className="lawcrest-hero section-dark">
                 <div className="container">
                     <div className="hero-split-grid">
                         
                         {/* Left Column: Headline, Subtitle, CTA Actions */}
                         <div className="hero-content-col">
-                            <div className="hero-badge-wrap">
+                            <div className="hero-badge-wrap" data-aos="fade-down" data-aos-duration="700">
                                 <span className="pill-badge pill-badge-dark">
-                                    Advocate & Legal Counsel
+                                    <Landmark size={14} className="badge-icon-gold" />
+                                    Advocate &amp; Legal Counsel • Delhi High Court &amp; Supreme Court
                                 </span>
                             </div>
 
-                            <h1 className="hero-massive-headline">
+                            <h1 className="hero-massive-headline" data-aos="fade-up" data-aos-duration="850" data-aos-delay="100">
                                 Your Only Trusted<br />Law Firm
                             </h1>
 
-                            <p className="hero-body-text">
+                            <p className="hero-body-text" data-aos="fade-up" data-aos-duration="850" data-aos-delay="200">
                                 Protecting Your Rights. Defending Your Future.<br />
-                                Experienced legal representation across Delhi & NCR. Authoritative, trustworthy, and firmly established.
+                                Premier legal representation across Delhi &amp; NCR. Authoritative, trustworthy, and firmly established with over 25 years of courtroom excellence.
                             </p>
                             
-                            <div className="hero-cta-actions">
+                            <div className="hero-cta-actions" data-aos="fade-up" data-aos-duration="850" data-aos-delay="300">
                                 <Link to="/contact" className="btn-lawcrest btn-lawcrest-solid-light">
                                     <span>Book a Consultation</span>
                                     <ArrowUpRight size={16} />
                                 </Link>
+                                <a href="tel:+919250845823" className="btn-lawcrest btn-lawcrest-outline-light">
+                                    <Phone size={15} />
+                                    <span>+91 9250845823</span>
+                                </a>
                             </div>
 
-                            <div className="hero-trust-summary">
+                            <div className="hero-trust-summary" data-aos="fade-up" data-aos-duration="850" data-aos-delay="400">
                                 <div className="trust-pill-tag">
                                     <CheckCircle2 size={15} className="pill-check" />
                                     <span>25+ Years Standing</span>
                                 </div>
                                 <div className="trust-pill-tag">
                                     <CheckCircle2 size={15} className="pill-check" />
-                                    <span>Supreme Court & Delhi High Court</span>
+                                    <span>Supreme Court &amp; Delhi High Court</span>
                                 </div>
                                 <div className="trust-pill-tag">
                                     <CheckCircle2 size={15} className="pill-check" />
@@ -289,20 +311,22 @@ const Home = () => {
                             </div>
                         </div>
 
-                        {/* Right Column: Normal Rectangular Portrait Card (No Arch, No Weird Lines) */}
+                        {/* Right Column: Portrait Card */}
                         <div className="hero-portrait-col">
-                            <div className="hero-normal-card">
+                            <div className="hero-normal-card" data-aos="zoom-in" data-aos-duration="950" data-aos-delay="200">
                                 <div className="normal-image-wrapper">
                                     <img 
                                         src="/sarfaraz_hussain.png" 
                                         alt="Advocate Sarfaraz Hussain" 
                                         className="normal-portrait-photo"
                                     />
+                                    <div className="hero-portrait-overlay-glow"></div>
                                 </div>
                                 <div className="normal-card-caption">
                                     <div className="caption-text">
                                         <strong>Sarfaraz Hussain</strong>
-                                        <span>Advocate, Supreme Court of India & Delhi High Court</span>
+                                        <span>Advocate, Supreme Court of India &amp; Delhi High Court</span>
+                                        <small className="caption-sub">B.E. (Civil), LL.B, LL.M (Crl.)</small>
                                     </div>
                                     <div className="caption-badge">
                                         <span>Chamber Block-I</span>
@@ -318,83 +342,93 @@ const Home = () => {
             {/* 2. JURISDICTIONS & TRUST RIBBON (Cream Background) */}
             <section className="lawcrest-trust-ribbon section-cream">
                 <div className="container">
-                    <div className="trust-ribbon-content">
+                    <div className="trust-ribbon-content" data-aos="fade-up" data-aos-duration="800">
                         <div className="trust-ribbon-label">
-                            <span>Practicing Across Courts & Tribunals</span>
+                            <span>Practicing Across Courts &amp; Tribunals</span>
                         </div>
                         <div className="trust-ribbon-badges">
-                            <span className="trust-badge">Supreme Court of India</span>
-                            <span className="trust-badge">Delhi High Court</span>
-                            <span className="trust-badge">District & Sessions Courts</span>
-                            <span className="trust-badge">Waqf Tribunals</span>
-                            <span className="trust-badge">MACT Courts</span>
-                            <span className="trust-badge">Consumer Commissions</span>
+                            {["Supreme Court of India", "Delhi High Court", "District & Sessions Courts", "Waqf Tribunals", "MACT Courts", "Consumer Commissions"].map((badge, bIdx) => (
+                                <span key={bIdx} className="trust-badge" data-aos="zoom-in" data-aos-delay={bIdx * 70}>
+                                    {badge}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 3. EDITORIAL ABOUT STATEMENT & STATS (Cream Background) */}
+            {/* 3. EDITORIAL ABOUT STATEMENT & ANIMATED STATS (Cream Background) */}
             <section className="lawcrest-about-statement section-cream">
                 <div className="container">
-                    <div className="about-statement-grid">
+                    <div className="about-statement-grid" data-aos="fade-up" data-aos-duration="800">
                         <div className="about-label-col">
                             <span className="statement-tag">About Us</span>
                         </div>
                         <div className="about-text-col">
                             <p className="statement-large-text">
-                                At Sarfaraz Hussain Advocate Law Offices, we've been turning complex legal challenges into favorable outcomes across Delhi & NCR, handling over 10,000+ cases. We take pride in delivering tailored solutions that match your rights, cases, and future.
+                                At Sarfaraz Hussain Advocate Law Offices, we've been turning complex legal challenges into favorable outcomes across Delhi &amp; NCR, handling over 10,000+ cases. We take pride in delivering tailored solutions that protect your statutory rights, family dignity, and constitutional liberty.
                             </p>
                         </div>
                     </div>
 
-                    {/* Stats 4-Column Bar with hairline borders */}
+                    {/* Stats 4-Column Bar with Animated Counters */}
                     <div className="lawcrest-stats-grid">
-                        <div className="stat-card">
-                            <span className="stat-number">1000+</span>
-                            <span className="stat-title">Happy Clients</span>
+                        <div className="stat-card" data-aos="fade-up" data-aos-delay="100">
+                            <span className="stat-number">
+                                <AnimatedCounter end={1000} suffix="+" />
+                            </span>
+                            <span className="stat-title">Consulted Clients</span>
                         </div>
-                        <div className="stat-card">
-                            <span className="stat-number">10000+</span>
-                            <span className="stat-title">Cases Success</span>
+
+                        <div className="stat-card" data-aos="fade-up" data-aos-delay="200">
+                            <span className="stat-number">
+                                <AnimatedCounter end={10000} suffix="+" />
+                            </span>
+                            <span className="stat-title">Cases Resolved</span>
                         </div>
-                        <div className="stat-card">
-                            <span className="stat-number">2500+</span>
-                            <span className="stat-title">Recovery Matters</span>
+
+                        <div className="stat-card" data-aos="fade-up" data-aos-delay="300">
+                            <span className="stat-number">
+                                <AnimatedCounter end={2500} suffix="+" />
+                            </span>
+                            <span className="stat-title">Civil &amp; Recovery Matters</span>
                         </div>
-                        <div className="stat-card">
-                            <span className="stat-number">800+</span>
-                            <span className="stat-title">Cases Handled</span>
+
+                        <div className="stat-card" data-aos="fade-up" data-aos-delay="400">
+                            <span className="stat-number">
+                                <AnimatedCounter end={800} suffix="+" />
+                            </span>
+                            <span className="stat-title">Waqf &amp; Special Writs</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 4. WHY CLIENTS TRUST US (Split Sticky Layout on Cream) */}
+            {/* 4. WHY CLIENTS TRUST US (Split Layout with Scroll Reveals) */}
             <section className="lawcrest-why-trust section-cream">
                 <div className="container">
-                    <div className="section-title-wrap">
+                    <div className="section-title-wrap" data-aos="fade-up">
                         <h2 className="editorial-title">Why Clients Trust Us</h2>
                         <p className="editorial-subtitle">
-                            We fight tirelessly for every client because your future is too important to leave to chance. Integrity. Excellence. Empathy.
+                            We fight tirelessly for every client because your future is too important to leave to chance. Integrity. Strategic Acumen. Unshakable Empathy.
                         </p>
                     </div>
 
                     <div className="why-trust-grid">
                         {/* Left Column: Portrait Card */}
-                        <div className="why-trust-image-card">
+                        <div className="why-trust-image-card" data-aos="fade-up" data-aos-duration="850">
                             <div className="image-frame">
-                                <img src="/sarfaraz_hussain.png" alt="Advocate Sarfaraz Hussain" />
+                                <img src="/images/scales_of_justice.png" alt="Scales of Justice - Sarfaraz Law" />
                                 <div className="image-card-caption">
-                                    <strong>Sarfaraz Hussain</strong>
-                                    <span>Advocate • Supreme Court & Delhi High Court</span>
+                                    <strong>Scales of Justice</strong>
+                                    <span>Pillars of Integrity, Equity &amp; Law</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Right Column: Numbered List */}
                         <div className="why-trust-list">
-                            <div className="trust-item">
+                            <div className="trust-item" data-aos="fade-up" data-aos-delay="100">
                                 <span className="trust-item-num">1.</span>
                                 <div className="trust-item-body">
                                     <h3 className="trust-item-title">Case Investigation</h3>
@@ -404,7 +438,7 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <div className="trust-item">
+                            <div className="trust-item" data-aos="fade-up" data-aos-delay="200">
                                 <span className="trust-item-num">2.</span>
                                 <div className="trust-item-body">
                                     <h3 className="trust-item-title">Strategic Litigation</h3>
@@ -414,17 +448,17 @@ const Home = () => {
                                 </div>
                             </div>
 
-                            <div className="trust-item">
+                            <div className="trust-item" data-aos="fade-up" data-aos-delay="300">
                                 <span className="trust-item-num">3.</span>
                                 <div className="trust-item-body">
-                                    <h3 className="trust-item-title">Legal Analysis</h3>
+                                    <h3 className="trust-item-title">Legal Precedents Analysis</h3>
                                     <p className="trust-item-desc">
-                                        In-depth interpretation of statutory precedents, High Court rulings, and constitutional provisions relevant to your case.
+                                        In-depth interpretation of statutory precedents, High Court rulings, and Supreme Court constitutional provisions.
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="trust-item">
+                            <div className="trust-item" data-aos="fade-up" data-aos-delay="400">
                                 <span className="trust-item-num">4.</span>
                                 <div className="trust-item-body">
                                     <h3 className="trust-item-title">Dedicated Representation</h3>
@@ -438,12 +472,12 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 5. PRACTICE AREAS: SEEN ONE AT A TIME + FUNCTIONAL NEXT / PREV BUTTONS */}
+            {/* 5. PRACTICE AREAS: ONE AT A TIME SLIDER (Dark Section) */}
             <section className="lawcrest-practice-one-at-a-time section-dark">
                 <div className="container">
                     
                     {/* Header with Title and Working Next/Prev Buttons */}
-                    <div className="practice-slider-header">
+                    <div className="practice-slider-header" data-aos="fade-up">
                         <div>
                             <span className="pill-badge pill-badge-dark">Areas of Expertise</span>
                             <h2 className="editorial-title text-white">Our Practice Areas</h2>
@@ -482,7 +516,7 @@ const Home = () => {
                     </div>
 
                     {/* Viewport showing EXACTLY ONE card at a time */}
-                    <div className="single-card-viewport">
+                    <div className="single-card-viewport" data-aos="zoom-in" data-aos-duration="900" data-aos-delay="100">
                         <div 
                             className="single-card-track"
                             style={{ transform: `translateX(-${currentPractice * 100}%)` }}
@@ -515,7 +549,7 @@ const Home = () => {
                                         {/* Right Side: Numbered Breakdown */}
                                         <div className="slide-card-right">
                                             <div className="proceedings-box">
-                                                <h4 className="proceedings-heading">Litigation & Proceedings Covered:</h4>
+                                                <h4 className="proceedings-heading">Litigation &amp; Proceedings Covered:</h4>
                                                 <ul className="proceedings-list">
                                                     {area.items.map((item, itemIdx) => (
                                                         <li key={itemIdx} className="proceeding-item">
@@ -533,7 +567,7 @@ const Home = () => {
                     </div>
 
                     {/* Bottom Indicator Dots */}
-                    <div className="practice-dots-row">
+                    <div className="practice-dots-row" data-aos="fade-up" data-aos-delay="200">
                         {practiceAreasData.map((area, dotIdx) => (
                             <button
                                 key={dotIdx}
@@ -550,117 +584,180 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 6. MEET OUR ATTORNEYS: INTERACTIVE SHOWCASE (Senior Developer Experience) */}
-            <section className="lawcrest-team-interactive section-cream">
+            {/* 6. MEET OUR ATTORNEYS: ELEVATED LUXURY LAWYER SHOWCASE */}
+            <section className="lawcrest-team-interactive section-cream" id="attorneys">
                 <div className="container">
                     
-                    {/* Header */}
-                    <div className="section-title-wrap text-center">
-                        <span className="pill-badge pill-badge-cream">Legal Counsel</span>
-                        <h2 className="editorial-title">Meet Our Attorneys</h2>
+                    {/* Section Header */}
+                    <div className="section-title-wrap text-center" data-aos="fade-up">
+                        <span className="pill-badge pill-badge-cream">
+                            <Scale size={14} className="badge-icon-gold" />
+                            Legal Counsel &amp; Advocates
+                        </span>
+                        <h2 className="editorial-title">Meet Our Legal Counsel</h2>
                         <p className="editorial-subtitle">
-                            Lawyers you can actually talk to. We're not hiding behind desks or legal jargon — we're here to listen, strategize, and guide.
+                            Advocates you can personally consult and strategize with. Experienced courtroom leaders, former apex prosecutors, and sharp litigation associates.
                         </p>
 
                         {/* Interactive Category Filter Pills */}
-                        <div className="team-filter-pill-group">
+                        <div className="team-filter-pill-group" data-aos="fade-up" data-aos-delay="150">
                             <button
                                 className={`team-filter-btn ${teamFilter === 'all' ? 'active' : ''}`}
                                 onClick={() => setTeamFilter('all')}
                             >
-                                All Counsel ({teamMembers.length})
+                                All Legal Counsel ({teamMembers.length})
                             </button>
                             <button
                                 className={`team-filter-btn ${teamFilter === 'senior' ? 'active' : ''}`}
                                 onClick={() => setTeamFilter('senior')}
                             >
-                                Senior Advocates (2)
+                                Senior Partners &amp; Apex Advocates (2)
+                            </button>
+                            <button
+                                className={`team-filter-btn ${teamFilter === 'advocate' ? 'active' : ''}`}
+                                onClick={() => setTeamFilter('advocate')}
+                            >
+                                Litigation Counsel (1)
                             </button>
                             <button
                                 className={`team-filter-btn ${teamFilter === 'associate' ? 'active' : ''}`}
                                 onClick={() => setTeamFilter('associate')}
                             >
-                                Associates & Staff (5)
+                                Associate Advocates (4)
                             </button>
                         </div>
                     </div>
 
-                    {/* Spotlight Hero Box (Click any card to inspect) */}
-                    <div className="attorney-spotlight-dossier">
+                    {/* Spotlight Hero Dossier (Prominently displays selected lawyer) */}
+                    <div className="attorney-spotlight-dossier" data-aos="zoom-in" data-aos-duration="900" data-aos-delay="150">
                         <div className="spotlight-portrait-box">
                             <img src={selectedAttorney.img} alt={selectedAttorney.name} />
                             <div className="spotlight-active-badge">
                                 <Sparkles size={14} />
-                                <span>Active</span>
+                                <span>Active Standing</span>
+                            </div>
+                            <div className="spotlight-court-strip">
+                                <span>{selectedAttorney.court}</span>
                             </div>
                         </div>
 
                         <div className="spotlight-content-box">
                             <div className="spotlight-header-meta">
-                                <span className="spotlight-court-tag">{selectedAttorney.court}</span>
-                                <span className="spotlight-exp-tag">{selectedAttorney.experience}</span>
+                                <span className="spotlight-exp-tag">
+                                    <Award size={13} />
+                                    {selectedAttorney.experience}
+                                </span>
+                                <span className="spotlight-qual-tag">
+                                    <GraduationCap size={13} />
+                                    {selectedAttorney.qualification}
+                                </span>
                             </div>
 
                             <h3 className="spotlight-attorney-name">{selectedAttorney.name}</h3>
                             <p className="spotlight-attorney-role">{selectedAttorney.role}</p>
 
+                            <p className="spotlight-bio-text">{selectedAttorney.bio}</p>
+
                             <div className="spotlight-specialty-block">
-                                <span className="block-label">Core Focus & Specialization:</span>
+                                <span className="block-label">Core Focus &amp; Practice Domains:</span>
                                 <p className="block-val">{selectedAttorney.specialty}</p>
                             </div>
 
+                            {selectedAttorney.cases && (
+                                <div className="spotlight-cases-block">
+                                    <span className="block-label">Notable Cases &amp; Appearances:</span>
+                                    <p className="block-val-cases">{selectedAttorney.cases}</p>
+                                </div>
+                            )}
+
                             <div className="spotlight-actions-row">
-                                <Link to="/contact" className="btn-lawcrest btn-lawcrest-outline-dark">
-                                    <span>Book Consultation</span>
+                                <Link to="/contact" className="btn-lawcrest btn-lawcrest-solid-dark">
+                                    <span>Consult With {selectedAttorney.name.split(' ')[0]}</span>
                                     <ArrowUpRight size={15} />
                                 </Link>
+                                <a 
+                                    href={`tel:${selectedAttorney.phone}`}
+                                    className="btn-lawcrest btn-lawcrest-outline-dark"
+                                >
+                                    <Phone size={14} />
+                                    <span>Direct Chamber Line</span>
+                                </a>
+                                <a 
+                                    href="https://wa.me/919250845823" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="btn-lawcrest btn-lawcrest-gold"
+                                >
+                                    <MessageCircle size={15} />
+                                    <span>WhatsApp</span>
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                    {/* Interactive Tilted Cards Deck */}
+                    {/* Interactive Lawyers Card Grid with Smooth Selection and Micro-Interactions */}
                     <div className="lawcrest-interactive-team-deck">
                         {filteredTeam.map((member, index) => {
                             const isSelected = selectedAttorney.id === member.id;
-                            const rotationClass = index % 2 === 0 ? 'tilt-left' : 'tilt-right';
 
                             return (
                                 <div
                                     key={member.id}
-                                    className={`interactive-team-card ${rotationClass} ${isSelected ? 'selected' : ''}`}
-                                    onClick={() => setSelectedAttorney(member)}
+                                    className={`interactive-team-card ${isSelected ? 'selected' : ''}`}
+                                    data-aos="fade-up"
+                                    data-aos-delay={(index % 4) * 120 + 80}
                                 >
-                                    <div className="card-photo-wrapper">
-                                        <img src={member.img} alt={member.name} />
-                                        
-                                        {/* Floating Quick Action Overlay */}
-                                        <div className="card-action-bar">
-                                            <a 
-                                                href={`tel:${member.phone}`}
-                                                className="quick-icon-btn"
-                                                title="Call Advocate"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <Phone size={14} />
-                                            </a>
-                                            <a 
-                                                href="https://wa.me/919818225972" 
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="quick-icon-btn"
-                                                title="WhatsApp"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <MessageCircle size={14} />
-                                            </a>
-                                        </div>
-                                    </div>
+                                    <div 
+                                        className="team-card-inner-clickable"
+                                        onClick={() => setSelectedAttorney(member)}
+                                        role="button"
+                                        tabIndex={0}
+                                        aria-label={`Select ${member.name} dossier`}
+                                        onKeyDown={(e) => { if (e.key === 'Enter') setSelectedAttorney(member); }}
+                                    >
+                                        <div className="card-photo-wrapper">
+                                            <img src={member.img} alt={member.name} loading="lazy" />
+                                            
+                                            {/* Selection check pill */}
+                                            {isSelected && (
+                                                <div className="card-selected-pill">
+                                                    <CheckCircle2 size={13} />
+                                                    <span>Inspecting Dossier</span>
+                                                </div>
+                                            )}
 
-                                    <div className="card-info-footer">
-                                        <h4 className="card-member-name">{member.name}</h4>
-                                        <span className="card-member-role">{member.role}</span>
-                                        <div className="card-select-hint">
-                                            <span>{isSelected ? '✓ Viewing' : 'Click to inspect profile'}</span>
+                                            {/* Floating Quick Action Overlay */}
+                                            <div className="card-action-bar">
+                                                <a 
+                                                    href={`tel:${member.phone}`}
+                                                    className="quick-icon-btn"
+                                                    title={`Call ${member.name}`}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    aria-label={`Call ${member.name}`}
+                                                >
+                                                    <Phone size={14} />
+                                                </a>
+                                                <a 
+                                                    href="https://wa.me/919250845823" 
+                                                    target="_blank" 
+                                                    rel="noopener noreferrer"
+                                                    className="quick-icon-btn"
+                                                    title="WhatsApp Chamber"
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    aria-label="WhatsApp chamber"
+                                                >
+                                                    <MessageCircle size={14} />
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <div className="card-info-footer">
+                                            <h4 className="card-member-name">{member.name}</h4>
+                                            <span className="card-member-role">{member.role}</span>
+                                            <span className="card-court-info">{member.court}</span>
+                                            <div className="card-select-hint">
+                                                <span>{isSelected ? '✓ Viewing In Detail' : 'Click to inspect full dossier'}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -671,75 +768,15 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 7. CLIENT TESTIMONIALS (Cream Background) */}
-            <section className="lawcrest-testimonials section-cream">
-                <div className="container">
-                    <div className="section-title-wrap text-center">
-                        <span className="pill-badge pill-badge-cream">Client Feedback</span>
-                        <h2 className="editorial-title">Testimonials</h2>
-                        <p className="editorial-subtitle">
-                            Our clients share their honest experiences so you can feel confident before you walk in.
-                        </p>
-                    </div>
-
-                    <div className="testimonials-grid">
-                        <div className="testimonial-card">
-                            <div className="testimonial-stars">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={16} fill="#c5a059" color="#c5a059" />
-                                ))}
-                            </div>
-                            <p className="testimonial-quote">
-                                "Advocate Sarfaraz Hussain provided exceptional defense in our high-stakes criminal bail matter. His strategic courtroom acumen and profound statutory clarity resulted in a swift and favorable outcome."
-                            </p>
-                            <div className="testimonial-author">
-                                <strong>Rajesh Sharma</strong>
-                                <span>Criminal Litigation Matter</span>
-                            </div>
-                        </div>
-
-                        <div className="testimonial-card">
-                            <div className="testimonial-stars">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={16} fill="#c5a059" color="#c5a059" />
-                                ))}
-                            </div>
-                            <p className="testimonial-quote">
-                                "Handled our multi-crore property dispute before the Delhi High Court with exemplary precision. Highly trustworthy, disciplined, and transparent legal counsel throughout."
-                            </p>
-                            <div className="testimonial-author">
-                                <strong>Khurshid Alam</strong>
-                                <span>Civil & Property Dispute</span>
-                            </div>
-                        </div>
-
-                        <div className="testimonial-card">
-                            <div className="testimonial-stars">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={16} fill="#c5a059" color="#c5a059" />
-                                ))}
-                            </div>
-                            <p className="testimonial-quote">
-                                "In an extremely sensitive matrimonial and custody matter, the firm guided us with genuine compassion and decisive legal strategy, securing fair settlements."
-                            </p>
-                            <div className="testimonial-author">
-                                <strong>Shabana Parveen</strong>
-                                <span>Family Law Settlement</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* 8. FREQUENTLY ASKED QUESTIONS (Dark Obsidian like Lawcrest) */}
+            {/* 9. FREQUENTLY ASKED QUESTIONS (Dark Obsidian Section) */}
             <section className="lawcrest-faq section-dark">
                 <div className="container">
-                    <div className="faq-header-bar">
+                    <div className="faq-header-bar" data-aos="fade-up">
                         <div>
                             <span className="pill-badge pill-badge-dark">Got Questions?</span>
                             <h2 className="editorial-title text-white">Frequently Asked Questions</h2>
                             <p className="editorial-subtitle text-muted-dark">
-                                We've gathered the most common questions so you start with clarity, not confusion.
+                                Key information regarding consultation procedures, courtroom jurisdictions, and legal representations.
                             </p>
                         </div>
                         <Link to="/contact" className="btn-lawcrest btn-lawcrest-outline-light">
@@ -750,7 +787,7 @@ const Home = () => {
 
                     <div className="faq-split-layout">
                         {/* Left Side: Chamber Info Card */}
-                        <div className="faq-visual-card">
+                        <div className="faq-visual-card" data-aos="fade-right" data-aos-duration="900">
                             <div className="faq-chamber-preview">
                                 <div className="chamber-preview-top">
                                     <div className="chamber-emblem">
@@ -773,7 +810,7 @@ const Home = () => {
                                     </div>
                                     <div className="chamber-feature">
                                         <CheckCircle2 size={18} className="feat-icon" />
-                                        <span>Transparent Assessment of Merits & Risks</span>
+                                        <span>Transparent Assessment of Merits &amp; Risks</span>
                                     </div>
                                 </div>  
                             </div>
@@ -784,7 +821,7 @@ const Home = () => {
                             {faqItems.map((item, idx) => {
                                 const isOpen = openFaq === idx;
                                 return (
-                                    <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`}>
+                                    <div key={idx} className={`faq-item ${isOpen ? 'active' : ''}`} data-aos="fade-left" data-aos-delay={idx * 70 + 80}>
                                         <button
                                             className="faq-question-btn"
                                             onClick={() => toggleFaq(idx)}
@@ -808,25 +845,25 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* 9. GRAND CTA BANNER (Dark Obsidian Gradient) */}
+            {/* 10. GRAND CTA BANNER (Dark Obsidian Gradient) */}
             <section className="lawcrest-cta-banner section-dark">
                 <div className="container">
-                    <div className="cta-banner-inner">
+                    <div className="cta-banner-inner" data-aos="zoom-in" data-aos-duration="950">
                         <span className="pill-badge pill-badge-dark">Get Legal Clarity</span>
                         <h2 className="cta-headline">
                             Protecting Your Rights.<br />Defending Your Future.
                         </h2>
                         <p className="cta-subtext">
-                            Connect with Advocate Sarfaraz Hussain and our dedicated legal team for decisive, experienced counsel.
+                            Connect with Advocate Sarfaraz Hussain and our dedicated legal team for decisive, experienced counsel before Supreme Court &amp; High Court.
                         </p>
                         <div className="cta-btn-group">
                             <Link to="/contact" className="btn-lawcrest btn-lawcrest-solid-light">
-                                <span>Schedule Consultation</span>
+                                <span>Schedule Chamber Consultation</span>
                                 <ArrowUpRight size={16} />
                             </Link>
-                            <a href="tel:+919818225972" className="btn-lawcrest btn-lawcrest-outline-light">
+                            <a href="tel:+919250845823" className="btn-lawcrest btn-lawcrest-outline-light">
                                 <Phone size={15} />
-                                <span>Call Chamber Now</span>
+                                <span>Call Chamber: +91 9250845823</span>
                             </a>
                         </div>
                     </div>

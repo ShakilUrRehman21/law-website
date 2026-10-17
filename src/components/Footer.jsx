@@ -76,6 +76,12 @@ const Footer = () => {
                                 </div>
                             </li>
                             <li>
+                                <Mail size={18} className="contact-icon" />
+                                <div>
+                                    <a href="mailto:aa.affanhus@gmail.com">aa.affanhus@gmail.com</a>
+                                </div>
+                            </li>
+                            <li>
                                 <Clock size={18} className="contact-icon" />
                                 <div>
                                     <span>Mon - Fri: 4:00 PM - 8:00 PM<br />Sat: By Appointment</span>
