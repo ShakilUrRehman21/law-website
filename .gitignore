@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Media & Large Videos (>100MB)
+# Media & Videos (Kept offline to ensure fast website loading)
 public/videos/
 *.mp4

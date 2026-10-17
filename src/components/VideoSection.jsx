@@ -6,7 +6,8 @@ import './VideoSection.css';
 export const videoList = [
     {
         id: 1,
-        src: '/videos/1.mp4',
+        embedUrl: 'https://drive.google.com/file/d/1Xt9dH14vWeI3-1Rd99iFRYstfAH8zISy/preview',
+        shareUrl: 'https://drive.google.com/file/d/1Xt9dH14vWeI3-1Rd99iFRYstfAH8zISy/view?usp=sharing',
         title: 'National Courtroom Briefing & Judicial Escort',
         channel: 'National Legal Media',
         tag: 'Court Proceedings',
@@ -15,7 +16,8 @@ export const videoList = [
     },
     {
         id: 2,
-        src: '/videos/2.mp4',
+        embedUrl: 'https://drive.google.com/file/d/1pMYQPDNY_US7twrxiiBHsF_VsAJhTyYa/preview',
+        shareUrl: 'https://drive.google.com/file/d/1pMYQPDNY_US7twrxiiBHsF_VsAJhTyYa/view?usp=sharing',
         title: "India TV Prime Debate: 20 घंटे से JNU 'बंधक'",
         channel: 'India TV Special Broadcast',
         tag: 'Prime News Broadcast',
@@ -24,7 +26,8 @@ export const videoList = [
     },
     {
         id: 3,
-        src: '/videos/3.mp4',
+        embedUrl: 'https://drive.google.com/file/d/1UfM2no-OAPG-06BcJ-Hr8HXyCCdWb51G/preview',
+        shareUrl: 'https://drive.google.com/file/d/1UfM2no-OAPG-06BcJ-Hr8HXyCCdWb51G/view?usp=sharing',
         title: 'High Court Press Conference & Counsel Statement',
         channel: 'Press Trust & National Media',
         tag: 'Live Press Briefing',
@@ -33,7 +36,8 @@ export const videoList = [
     },
     {
         id: 4,
-        src: '/videos/4.mp4',
+        embedUrl: 'https://drive.google.com/file/d/1MDxD2qSKYdOg-3aQ90hku7g8EwItcvqn/preview',
+        shareUrl: 'https://drive.google.com/file/d/1MDxD2qSKYdOg-3aQ90hku7g8EwItcvqn/view?usp=sharing',
         title: 'CNN-IBN: Ex-Top Cop Sharma to Walk Free',
         channel: 'CNN-IBN Special Report',
         tag: 'Shivani Bhatnagar Trial',
@@ -42,7 +46,8 @@ export const videoList = [
     },
     {
         id: 5,
-        src: '/videos/5.mp4',
+        embedUrl: 'https://drive.google.com/file/d/1Bf1CQWacVxDXebft_hhK0JZV5jxxqlS_/preview',
+        shareUrl: 'https://drive.google.com/file/d/1Bf1CQWacVxDXebft_hhK0JZV5jxxqlS_/view?usp=sharing',
         title: 'TV9 National News: Delhi High Court Entry',
         channel: 'TV9 News Network',
         tag: 'High Court Coverage',
@@ -101,26 +106,37 @@ export default function VideoSection({ isDark = false, showHeader = true }) {
                                     )}
                                 </div>
 
-                                <div className="video-player-wrapper">
-                                    <video
-                                        controls
-                                        preload="metadata"
-                                        playsInline
-                                        className="sarfaraz-native-video"
-                                    >
-                                        <source src={video.src} type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                    
-                                    <button
-                                        type="button"
-                                        className="theater-expand-btn"
-                                        onClick={() => openTheater(video)}
-                                        title="Watch in Theater Mode"
-                                        aria-label="Expand video in theater mode"
-                                    >
-                                        <Maximize2 size={16} />
-                                    </button>
+                                <div className="video-player-wrapper gdrive-player-wrapper">
+                                    <iframe
+                                        src={video.embedUrl}
+                                        title={video.title}
+                                        allow="autoplay; encrypted-media"
+                                        allowFullScreen
+                                        loading="lazy"
+                                        className="sarfaraz-gdrive-iframe"
+                                    ></iframe>
+
+                                    <div className="video-player-overlay-actions">
+                                        <button
+                                            type="button"
+                                            className="theater-expand-btn"
+                                            onClick={() => openTheater(video)}
+                                            title="Watch in Theater Mode"
+                                            aria-label="Expand video in theater mode"
+                                        >
+                                            <Maximize2 size={16} />
+                                        </button>
+                                        <a
+                                            href={video.shareUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="gdrive-direct-link"
+                                            title="Open on Google Drive"
+                                            aria-label="Open on Google Drive"
+                                        >
+                                            <ArrowUpRight size={14} />
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div className="video-caption-box">
@@ -161,24 +177,34 @@ export default function VideoSection({ isDark = false, showHeader = true }) {
                                 <span className="theater-pill">{activeModalVideo.tag}</span>
                                 <h3>{activeModalVideo.title}</h3>
                             </div>
-                            <button
-                                className="theater-close-btn"
-                                onClick={closeTheater}
-                                aria-label="Close video player"
-                            >
-                                <X size={22} />
-                            </button>
+                            <div className="theater-modal-controls">
+                                <a
+                                    href={activeModalVideo.shareUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="theater-gdrive-btn"
+                                    title="Open directly in Google Drive"
+                                >
+                                    <span>Google Drive</span>
+                                    <ArrowUpRight size={13} />
+                                </a>
+                                <button
+                                    className="theater-close-btn"
+                                    onClick={closeTheater}
+                                    aria-label="Close video player"
+                                >
+                                    <X size={22} />
+                                </button>
+                            </div>
                         </div>
-                        <div className="theater-video-wrapper">
-                            <video
-                                controls
-                                autoPlay
-                                playsInline
-                                className="theater-modal-video"
-                            >
-                                <source src={activeModalVideo.src} type="video/mp4" />
-                                Your browser does not support HTML5 video.
-                            </video>
+                        <div className="theater-video-wrapper gdrive-theater-wrapper">
+                            <iframe
+                                src={activeModalVideo.embedUrl}
+                                title={activeModalVideo.title}
+                                allow="autoplay; encrypted-media"
+                                allowFullScreen
+                                className="theater-modal-iframe"
+                            ></iframe>
                         </div>
                         <div className="theater-modal-footer">
                             <p>{activeModalVideo.description}</p>
