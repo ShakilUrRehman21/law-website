@@ -1,125 +1,103 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
-import './Header.css';
+import { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
+import { chamber, navLinks } from '../data/site';
+import { lockScroll } from '../lib/lenis';
 
-const Header = () => {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const location = useLocation();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 30) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
+export default function Header() {
+  const { scrollY } = useScroll();
+  const [solid, setSolid] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [location]);
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setSolid(y > 40);
+    setHidden(y > 400 && y > prev && !menuOpen);
+  });
 
-    useEffect(() => {
-        setIsMobileMenuOpen(false);
-    }, [location]);
+  useEffect(() => {
+    lockScroll(menuOpen);
+    const onKey = (e) => e.key === 'Escape' && setMenuOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
 
-    const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'About', path: '/about' },
-        { name: 'Services', path: '/services' },
-        { name: 'Practice Areas', path: '/practice-areas' },
-        { name: 'Gallery', path: '/gallery' },
-        { name: 'Contact', path: '/contact' },
-    ];
+  return (
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className={`site-header ${solid && !menuOpen ? 'is-solid' : ''} ${hidden ? 'is-hidden' : ''}`}>
+        <div className="wrap header-inner">
+          <Link to="/" onClick={() => setMenuOpen(false)} className="wordmark" aria-label={`${chamber.name}, ${chamber.title}, home`}>
+            <span className="wordmark-name">{chamber.name}</span>
+            <span className="wordmark-title">{chamber.title}</span>
+          </Link>
 
-    return (
-        <header className={`lawcrest-header ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="container lawcrest-header-container">
-                <Link to="/" className="lawcrest-logo">
-                    <span className="lawcrest-logo-title">Sarfaraz Law</span>
-                    <span className="lawcrest-logo-badge">Advocate & Associates</span>
-                </Link>
+          <nav className="header-nav" aria-label="Main">
+            {navLinks.map((l) => (
+              <NavLink key={l.path} to={l.path} className="nav-link">
+                {l.name}
+              </NavLink>
+            ))}
+          </nav>
 
-                <nav className="lawcrest-desktop-nav">
-                    <ul className="lawcrest-nav-list">
-                        {navLinks.map((link) => (
-                            <li key={link.name}>
-                                <NavLink
-                                    to={link.path}
-                                    className={({ isActive }) =>
-                                        `lawcrest-nav-link ${isActive ? 'active' : ''}`
-                                    }
-                                >
-                                    {link.name}
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
+          <a className="btn btn-small header-call" href={chamber.phoneHref}>
+            {chamber.phone}
+          </a>
 
-                <div className="lawcrest-header-actions">
-                    <Link to="/contact" className="lawcrest-header-btn">
-                        <span>Book a Consultation</span>
-                        <ArrowUpRight size={16} className="btn-icon" />
-                    </Link>
+          <button
+            type="button"
+            className={`menu-toggle ${menuOpen ? 'is-open' : ''}`}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            <span className="visually-hidden">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+            <span className="menu-bar" />
+            <span className="menu-bar" />
+          </button>
+        </div>
+      </header>
 
-                    <button
-                        type="button"
-                        className="lawcrest-mobile-toggle"
-                        onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-                        aria-label={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
-                        aria-expanded={isMobileMenuOpen}
-                    >
-                        {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
-                    </button>
-                </div>
-            </div>
-
-            {/* Mobile Navigation Drawer */}
-            <div className={`lawcrest-mobile-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
-                <div className="lawcrest-mobile-inner">
-                    <ul className="lawcrest-mobile-list">
-                        {navLinks.map((link) => (
-                            <li key={link.name}>
-                                <NavLink
-                                    to={link.path}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className={({ isActive }) =>
-                                        `lawcrest-mobile-link ${isActive ? 'active' : ''}`
-                                    }
-                                >
-                                    <span>{link.name}</span>
-                                    <ArrowUpRight size={14} className="mobile-link-arrow" />
-                                </NavLink>
-                            </li>
-                        ))}
-                    </ul>
-                    <div className="lawcrest-mobile-cta">
-                        <Link 
-                            to="/contact" 
-                            className="btn-lawcrest btn-lawcrest-solid-light mobile-cta-btn"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                            <span>Book a Consultation</span>
-                            <ArrowUpRight size={16} />
-                        </Link>
-                    </div>
-                </div>
-            </div>
-
-            {/* Mobile Backdrop Overlay */}
-            {isMobileMenuOpen && (
-                <div 
-                    className="lawcrest-mobile-backdrop" 
-                    onClick={() => setIsMobileMenuOpen(false)} 
-                    aria-hidden="true" 
-                />
-            )}
-        </header>
-    );
-};
-
-export default Header;
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            id="mobile-menu"
+            className="mobile-menu"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+          >
+            <nav className="wrap mobile-nav" aria-label="Mobile">
+              {[{ name: 'Home', path: '/' }, ...navLinks].map((l, i) => (
+                <motion.div
+                  key={l.path}
+                  initial={{ y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.15 + i * 0.05, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <NavLink to={l.path} end className="mobile-link" onClick={() => setMenuOpen(false)}>
+                    {l.name}
+                  </NavLink>
+                </motion.div>
+              ))}
+              <motion.div
+                className="mobile-contact"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <a href={chamber.phoneHref}>{chamber.phone}</a>
+                <a href={`mailto:${chamber.email}`}>{chamber.email}</a>
+              </motion.div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

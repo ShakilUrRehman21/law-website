@@ -1,68 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import './DisclaimerModal.css';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { lockScroll } from '../lib/lenis';
 
-const DisclaimerModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
+const KEY = 'barCouncilAgreed';
 
-    useEffect(() => {
-        const hasAgreed = localStorage.getItem('barCouncilAgreed');
-        if (!hasAgreed) {
-            setIsOpen(true);
-            document.body.style.overflow = 'hidden';
-            if (window.__lenis) {
-                window.__lenis.stop();
-            }
-        }
-    }, []);
-
-    const handleAgree = () => {
-        localStorage.setItem('barCouncilAgreed', 'true');
-        setIsOpen(false);
-        document.body.style.overflow = 'unset';
-        if (window.__lenis) {
-            window.__lenis.start();
-            window.__lenis.resize();
-        }
-        if (window.AOS) {
-            window.AOS.refresh();
-        }
-    };
-
-    const handleDisagree = () => {
-        window.location.href = 'https://google.com';
-    };
-
-    if (!isOpen) return null;
-
-    return (
-        <div className="modal-overlay">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h2>Disclaimer</h2>
-                </div>
-                <div className="modal-body">
-                    <p>
-                        As per the rules of the Bar Council of India, we are not permitted to solicit work and advertise.
-                        By clicking on the "I AGREE" button below, the user acknowledges the following:
-                    </p>
-                    <ul>
-                        <li>There has been no advertisement, personal communication, solicitation, invitation or inducement of any sort whatsoever from us or any of our members to solicit any work through this website.</li>
-                        <li>The user wishes to gain more information about us for their own information and use.</li>
-                        <li>The information about us is provided to the user only on their specific request.</li>
-                        <li>Any information obtained or materials downloaded from this website is completely at the user's volition and any transmission, receipt or use of this site is not intended to, and will not, create any lawyer-client relationship.</li>
-                        <li>None of the information contained on the website is in the nature of a legal opinion or otherwise amounts to any legal advice.</li>
-                    </ul>
-                    <p>
-                        Sarfaraz Hussain Advocate Law Offices, its partners, and members are not liable for any consequence of any action taken by the user relying on material / information provided under this website. In cases where the user has any legal issues, they in all cases must seek independent legal advice.
-                    </p>
-                </div>
-                <div className="modal-footer">
-                    <button className="btn btn-primary" onClick={handleAgree}>I AGREE</button>
-                    <button className="btn btn-outline" onClick={handleDisagree}>I DISAGREE</button>
-                </div>
-            </div>
-        </div>
-    );
+const readAgreed = () => {
+  try {
+    return localStorage.getItem(KEY) === 'true';
+  } catch {
+    return false;
+  }
 };
 
-export default DisclaimerModal;
+export default function DisclaimerModal() {
+  const [open, setOpen] = useState(() => !readAgreed());
+  const agreeRef = useRef(null);
+
+  useEffect(() => {
+    lockScroll(open);
+    if (open) agreeRef.current?.focus();
+  }, [open]);
+
+  const agree = () => {
+    try {
+      localStorage.setItem(KEY, 'true');
+    } catch {
+      /* storage unavailable: agreement lasts for this visit */
+    }
+    setOpen(false);
+  };
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="disclaimer-backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          <motion.div
+            className="disclaimer"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="disclaimer-title"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 20, opacity: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+          >
+            <h2 id="disclaimer-title">Disclaimer</h2>
+            <div className="disclaimer-body" data-lenis-prevent>
+              <p>
+                The Bar Council of India does not permit advocates to advertise or solicit work. By choosing “I agree”
+                you confirm that:
+              </p>
+              <ul>
+                <li>
+                  there has been no advertisement, personal communication, solicitation or inducement of any kind from
+                  us or any of our members to seek work through this website;
+                </li>
+                <li>you are seeking information about us for your own use, at your own request;</li>
+                <li>
+                  using this website, or anything obtained from it, does not create an advocate–client relationship;
+                </li>
+                <li>nothing on this website is a legal opinion or legal advice.</li>
+              </ul>
+              <p>
+                We are not liable for any action taken in reliance on material on this website. Anyone with a legal
+                problem should obtain independent legal advice.
+              </p>
+            </div>
+            <div className="disclaimer-actions">
+              <button ref={agreeRef} type="button" className="btn btn-ink" onClick={agree}>
+                I agree
+              </button>
+              <a className="btn btn-quiet" href="https://www.google.com">
+                Leave this site
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
